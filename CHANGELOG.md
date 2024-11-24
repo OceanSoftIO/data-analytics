@@ -34,8 +34,8 @@ DevOps CI/CD: so the content will be changed timely.
 
 ##### New Features
 
-* [x] 1st-Init Cookiecutter Data Science & Machine Learning
-* [x] 1st-Init Project Documentation
+* [x] 1st-Init [Cookiecutter Data Science & Machine Learning](https://github.com/drivendataorg/cookiecutter-data-science)
+* [x] 1st-Init Project Documentation: `mkdocs`
 
 ##### New Documentation
 

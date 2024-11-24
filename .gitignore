@@ -80,8 +80,8 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# # MkDocs documentation
-# docs/site/
+# MkDocs documentation
+docs/site/
 
 # PyBuilder
 .pybuilder/
@@ -147,8 +147,8 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
-# # mkdocs documentation
-# /site
+# mkdocs documentation
+/site
 
 # mypy
 .mypy_cache/

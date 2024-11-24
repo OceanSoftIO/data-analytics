@@ -1,47 +1,13 @@
-awscli
+## Analytics & AI
 diagrams
-ipython
-ipykernel
-ipywidgets
-matplotlib
-mkdocs
-numpy
+gunicorn
+openai
 pandas
 plotly
 python-dotenv
-seaborn
-scikit-learn
-scipy
-statsmodels
+requests
+vizro
+black
+flake8
+isort
 -e .
-
-
-openai
-openpyxl
-
-tensorflow
-torch
-
-mlflow
-jupyter_ai
-
-pyspark
-
-black
-flake8
-loguru
-# mkdocs
-# isort
-# setuptools
-# typer
-# wheel
-# -e .
-
-===
-
-black
-flake8
-
-
-
-

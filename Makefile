@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = data-science
+PROJECT_NAME = mlops
 PYTHON_VERSION = 3.12
 PYTHON_INTERPRETER = python
 
@@ -29,14 +29,14 @@ clean:
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	flake8 data_science
-	isort --check --diff --profile black data_science
-	black --check --config pyproject.toml data_science
+	flake8 mlops
+	isort --check --diff --profile black mlops
+	black --check --config pyproject.toml mlops
 
 ## Format source code with black
 .PHONY: format
 format:
-	black --config pyproject.toml data_science
+	black --config pyproject.toml mlops
 
 
 ## Download Data from storage system
@@ -55,24 +55,11 @@ sync_data_up:
 
 
 
-## Set up python interpreter environment
-.PHONY: create_environment
-create_environment:
-	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-	
-
-
 
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
 
-
-## Make Dataset
-.PHONY: data
-data: requirements
-	$(PYTHON_INTERPRETER) data_science/dataset.py
 
 
 #################################################################################

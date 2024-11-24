@@ -2,7 +2,6 @@
 
 🌟 An end-to-end full-stack Data Science and AI/ML project effectively implementing ML models, MLOps practices, scalable machine learning, and data storytelling. ✨
 
-
 📚 `🛠️ Experiment (Design + Develop) --> 🚀 Production (Deploy + Iterate) ⚙️`: Full-Stack **Data Science** and Production-Grade **Machine Learning** at Scale are the fastest-growing fields in technology. This repository aims to develop professional and strong advanced analytics skills to compete in the age of digital and AI. 🏁
 
 <div align="left">
@@ -44,6 +43,9 @@
 ## Project Organization
 
 > 🛠 Production-grade project structure for successful data-science or machine-learning projects 🚀
+
+> 💎 End-to-end Data Science and Advanced Analytics Experience 🚀
+
 
 ```
 ├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
