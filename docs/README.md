@@ -1,12 +1,19 @@
-Generating the docs
-----------
+# Welcome to MkDocs
 
-Use [mkdocs](http://www.mkdocs.org/) structure to update the documentation. 
+For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-Build locally with:
+## Commands
 
-    mkdocs build
+* `mkdocs new [dir-name]` - Create a new project.
+* `mkdocs serve` - Start the live-reloading docs server.
+* `mkdocs build` - Build the documentation site.
+* `mkdocs -h` - Print help message and exit.
 
-Serve locally with:
+## Project layout
 
-    mkdocs serve
+    mkdocs.yml    ## The configuration file.
+    docs/
+        index.md  ## The documentation homepage.
+        ...       ## Other markdown pages, images and other files.
+
+    mkdocs serve --dev-addr=0.0.0.0:8000
