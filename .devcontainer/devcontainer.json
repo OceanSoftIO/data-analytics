@@ -22,7 +22,8 @@
     "8000": {
       "label": "MkDocs",
       "requireLocalPort": true,
-      "onAutoForward": "openBrowser"
+      // "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
     },
     // "8080": {
     //   "label": "Nginx",
@@ -33,7 +34,8 @@
     "8888": {
       "label": "JupyterLab",
       "requireLocalPort": true,
-      "onAutoForward": "openBrowser"
+      // "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
     },
   },
   // Use 'postCreateCommand' to run commands after the container is created.
