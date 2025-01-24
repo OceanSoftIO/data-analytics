@@ -1,12 +1,8 @@
 # 🔥 CloudOps Automation at Scale 🦅
 
+🥉🥉🥉🥉🥉
+
 🌟 You can use [CloudOps Automation Runbooks](https://cloudops.oceansoft.io), built on Jupyter Notebooks, to quickly create SRE RunBooks for Runbook Automation and Cloud Infrastructure Management! 🌐
-
-> [!IMPORTANT]
-> **🏆 Mission**: Our mission is to simplify CloudOps Automation for DevOps and SRE teams by providing an extensive, community-driven repository of actions and runbooks that streamline day-to-day operations. 
-
-> [!NOTE]
-> **👁️ Vision**: Our vision is to be the 🥇 One-Stop Multi-Cloud Platform Engineering & Best Practices Solution for all CloudOps Automation needs, allowing DevOps and SRE teams to automate their workflows with ease, improve efficiency, and minimize toil.
 
 [![🐍 Runbooks PyPI version](https://img.shields.io/pypi/v/runbooks)](https://pypi.org/project/runbooks/) ![🦾 GitHub Container Registry](https://img.shields.io/github/v/tag/nnthanh101/runbooks:latest?label=GHCR%20Version&color=blue&logo=docker)
 
@@ -38,16 +34,6 @@
 
 ---
 
-### WIP
-
-- [ ] 📚 auto doc generation
-- [ ] **CLI Tools** – Typer simplifies automation for AWS resources.  
-- [ ] **Logging** – Loguru ensures structured logs for debugging. 
-- [x] 🐳 CI/CD Optimized Docker Image runs when a new *release* is created pushing to gh registry
-- [x] 🦾 GitHub actions:
-    - [x] auto publish to [`pypi`](https://pypi.org/) on push on `main`
-    - [ ] auto creating a new tag on push on `main`, sync versions
-    - [x] run `tests` and `lint` on `dev` and `main` when a PR is open
 
 ## 🚀 Quick Start
 

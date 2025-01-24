@@ -1,0 +1,21 @@
+## mkdocs.yml
+site_name: 🔥 CloudOps Automation 🦅
+site_author: nnthanh101@gmail.com
+
+theme:
+  name: "material"
+  custom_dir: docs/overrides
+
+  icon:
+    logo: "logo"
+  favicon: "images/favicon.ico"
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - 🥇 CloudOps Overview: index.md
+  - Explanation: 'runbooks/explanation.md'
+  - How-To Guides: 'runbooks/guides.md'
+  - Reference: 'runbooks/reference.md'
+  - Tutorials: 'runbooks/tutorials.md'

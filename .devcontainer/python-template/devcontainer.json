@@ -1,0 +1,130 @@
+// For format details, see https://aka.ms/devcontainer.json
+// For config options, see https://github.com/devcontainers/templates/tree/main/src/python
+{
+  "name": "CloudOps-Runbooks Cross-Platform Docker-Container, including Python, JupyterLab, Gunicorn, Nginx, and MkDocs.",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  // "build": { 
+  //   "context": "../",
+  //   "dockerfile": "../Dockerfile",
+  // },
+  // "image": "ghcr.io/nnthanh101/runbooks:latest",
+  "image": "docker.io/nnthanh101/runbooks:latest",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  // Mount configurations
+  "mounts": [
+    // "source=${localWorkspaceFolder},target=/workspace,type=bind",  // ✅ Unified mount for workspace
+    "source=${localEnv:HOME}/.aws,target=/workspaces/${localWorkspaceFolderBasename}/.aws,type=bind,readonly" // ✅ Read-only AWS credentials
+  ],
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    8000,
+    // 8080,
+    8888
+  ],
+  "portsAttributes": {
+    "8000": {
+      "label": "MkDocs",
+      "requireLocalPort": true,
+      // "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
+    },
+    // "8080": {
+    //   "label": "Nginx",
+    //   "onAutoForward": "notify",
+    //   // "onAutoForward": "ignore"
+    //   "requireLocalPort": true
+    // },
+    "8888": {
+      "label": "JupyterLab",
+      "requireLocalPort": true,
+      // "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
+    },
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "cd ~ && task",
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "task.vscode-task",
+        "GitHub.vscode-github-actions",
+        "streetsidesoftware.code-spell-checker",
+        "vscode-icons-team.vscode-icons",
+        "esbenp.prettier-vscode",
+        "vscode.git",
+        "charliermarsh.ruff",
+        "ms-python.debugpy",
+        "esbenp.prettier-vscode",
+        "KevinRose.vsc-python-indent",
+        // "HashiCorp.terraform",
+        // "yy0931.vscode-sqlite3-editor",
+        // "ms-ossdata.vscode-postgresql",
+        // "mtxr.sqltools-driver-sqlite",
+        // "mtxr.sqltools-driver-pg",
+        // "ms-azuretools.vscode-docker",
+        // "AmazonWebServices.aws-toolkit-vscode",
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        // "python.pythonPath": "/usr/local/bin/python3",
+        // "[python]": {
+        //   "editor.defaultFormatter": "ms-python.vscode-pylance",
+        //   "editor.formatOnType": true,
+        //   "editor.formatOnSave": true
+        // },
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        // "[jupyter]": {
+        //   "themeMatplotlibPlots": true,
+        //   "widgetScriptSources": [
+        //     "unpkg.com",
+        //     "jsdelivr.com"
+        //   ]
+      },
+      // "sqltools.connections": [
+      //   {
+      //     "name": "Container Database",
+      //     "driver": "PostgreSQL",
+      //     "previewLimit": 50,
+      //     "server": "localhost",
+      //     "port": 5432,
+      //     "database": "xopsdb",
+      //     "username": "xopsuser",
+      //     "password": "xopspassword"
+      //   }
+      // ],
+    }
+  },
+  // "containerEnv": {
+  //       "DISPLAY": "dummy",
+  //       "PYTHONUNBUFFERED": "True",
+  //       "UV_LINK_MODE": "copy",
+  //       "UV_PROJECT_ENVIRONMENT": "/home/os/.venv"
+  // },
+  "remoteEnv": {
+    "PYTHONPATH": "src",
+    "UV_LINK_MODE": "copy",
+    "UV_PROJECT_ENVIRONMENT": "/home/os/.venv",
+    "AWS_SHARED_CREDENTIALS_FILE": ".aws/credentials",
+    "AWS_CONFIG_FILE": ".aws/config",
+  },
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+  "remoteUser": "os"
+}

@@ -1,61 +1,38 @@
-### 0.2.0 (2024-04-10)
+### 0.2.0 (2025-01-12)
 
 ##### New Features
 
-* [x] Data_Loading_and_Descriptive_Statistics.ipynb
-  * [x] teradata-query-service.ipynb
-* [x] 1_Data_Understanding_Preparation.ipynb
-* [x] 2_Time_Series_Forecasting.ipynb
-* [x] dashboard/app.py
-* [x] DevOps CI/CD
-  * [x] Dashboard: https://analytics-experience-28038b544779.herokuapp.com/
-  * [x] Calendar:  https://analytics-experience-calendar.onrender.com/
+* [ ] ...
 
 ##### New Documentation
-
-* Project Deliverables: https://analytics-experience-calendar.onrender.com/
-* Data Understanding & Preparation
-  * https://analytics-experience.pages.dev/html/Air-Quality-Monitoring-Network
-  * https://analytics-experience.pages.dev/html/Data_Loading_and_Descriptive_Statistics
-  * https://analytics-experience.pages.dev/html/Data_Profiling_for_Penrose
-  * https://analytics-experience.pages.dev/html/Data_Profiling_for_Takapuna
-*  Project Documentation: 
-  * https://analytics-experience.pages.dev/
-* 🌟 [PoC] Intelligence Dashboard with McKinsey© Open-Source Data Visualisation: https://analytics-experience-28038b544779.herokuapp.com/
-
-DevOps CI/CD: so the content will be changed timely.
 
 ##### Refactor
 
 ##### Bug Fixes
 
 
-### 0.1.0 (2024-02-20)
+---
+
+### 0.1.5 (2025-01-05)
 
 ##### New Features
 
 * [x] 1st-Init [Cookiecutter Data Science & Machine Learning](https://github.com/drivendataorg/cookiecutter-data-science)
-* [x] 1st-Init Project Documentation: `mkdocs`
+* [x] 1st-Init Project Documentation using `mkdocs`
 
-##### New Documentation
+##### CloudOps/FinOps Project Template 
 
-* Test cases
-
-##### Refactor
-
-##### Bug Fixes
-
-
-### 0.0.0 (2024-02-15)
-
-##### New Features
-
-* 1st-Initial
-
-##### New Documentation
-
-* Test cases
-
-##### Refactor
-
-##### Bug Fixes
+Features:
+- [x] 🛠️ configuration in a single file [`pyproject.toml`](pyproject.toml)
+- [x] 📦 [`uv`](https://docs.astral.sh/uv/) as package manager
+- [x] 💅 [`ruff`](https://docs.astral.sh/ruff/) for linting and formatting
+- [x] 🧪 [`pytest`](https://docs.pytest.org/en/stable/) 
+- [x] 🧹 [`Taskfile`](Taskfile) with code quality checks
+- [x] 📚 Auto API Document Generation
+- [ ] **CLI Tools** – Typer simplifies automation for AWS resources.  
+- [x] **Logging** – Loguru ensures structured logs for debugging. 
+- [x] 🐳 CI/CD Optimized Docker Image runs when a new *release* is created pushing to gh registry
+- [x] 🦾 GitHub actions:
+    - [x] auto publish to [`pypi`](https://pypi.org/) on push on `main`
+    - [ ] auto creating a new tag on push on `main`, sync versions
+    - [x] run `tests` and `lint` on `dev` and `main` when a PR is open
