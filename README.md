@@ -1,10 +1,15 @@
-# 🔥 MLOps at Scale 🦅
+# 🔥 CloudOps Automation at Scale 🦅
 
-🌟 An end-to-end full-stack Data Science and AI/ML project effectively implementing ML models, MLOps practices, scalable machine learning, and data storytelling. ✨
+🌟 You can use [CloudOps Automation Runbooks](https://cloudops.oceansoft.io), built on Jupyter Notebooks, to quickly create SRE RunBooks for Runbook Automation and Cloud Infrastructure Management! 🌐
 
-https://analytics-experience.pages.dev
+> [!IMPORTANT]
+> **🏆 Mission**: Our mission is to simplify CloudOps Automation for DevOps and SRE teams by providing an extensive, community-driven repository of actions and runbooks that streamline day-to-day operations. 
 
-📚 `🛠️ Experiment (Design + Develop) --> 🚀 Production (Deploy + Iterate) ⚙️`: Full-Stack **Data Science** and Production-Grade **Machine Learning** at Scale are the fastest-growing fields in technology. This repository aims to develop professional and strong advanced analytics skills to compete in the age of digital and AI. 🏁
+> [!NOTE]
+> **👁️ Vision**: Our vision is to be the 🥇 One-Stop Multi-Cloud Platform Engineering & Best Practices Solution for all CloudOps Automation needs, allowing DevOps and SRE teams to automate their workflows with ease, improve efficiency, and minimize toil.
+
+[![🐍 Runbooks PyPI version](https://img.shields.io/pypi/v/runbooks)](https://pypi.org/project/runbooks/) ![🦾 GitHub Container Registry](https://img.shields.io/github/v/tag/nnthanh101/runbooks:latest?label=GHCR%20Version&color=blue&logo=docker)
+
 
 <div align="left">
   <a href="https://www.linkedin.com/in/nnthanh" target="blank"><img align="center" src="https://img.shields.io/badge/-nnthanh-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/nnthanh/" alt="Nhat-Thanh Nguyen" height="25" width="100" /></a>
@@ -14,105 +19,158 @@ https://analytics-experience.pages.dev
 
 ---
 
-🎯 End-to-end full-stack machine learning from experimental (design + development) to production (deployment + iteration) for iteratively building reliable production-grade AI/ML applications.
+## 🛠️ Features
 
-* [x] 💡 Agile CRISP-DM for Data Science and Machine Learning
-  * [x] Cookiecutter Data Science (CCDS) V2: data science tooling and MLOps
-  * [x] Agile Implementation of CRISP-DM for Data Science and Machine Learning
-* [ ] ⚙️ MLOps
-  * [ ] 💻 DevOps best practices for developing and deploying machine learning models.
-  * [ ] ⚙️ Build an end-to-end machine learning system by connecting MLOps components such as tracking, testing, serving, and orchestration.
-* [ ] 🚀 Dev to Prod:
-  * [ ] 🐙 Develop robust CI/CD workflows to continuously train and deploy better models in a modular way that integrates with any stack.
-  * [ ] 📈 Scale: ML workloads (data, training, tuning, and serving) are easily scalable, facilitating a quick and reliable transition from development to production without requiring code or infrastructure modifications.
+* 🥉 ✅**Lightning-Fast Toolchain**: Powered by 📦 `uv` - Next-generation Python dependency and build management, 💅 `ruff` - Linting and formatting at blazing speed, and 🧪 pytest - Robust testing framework with coverage reports.
+* 🥈 ✅**Effortless CI/CD Pipelines**: 🛠️ Taskfile Automation - Say goodbye to manual SDLC repetitive tasks, 🐳 Containerized Workflows – 🛡️ Security-first practices and Multi-stage Wolfi-based Docker builds for scalable production-ready environments, and ⚙️ Auto-publish to `PyPI` and GitHub Container Registry (`GHCR`) with GitHub Actions.
+* 🥇 ☑️**CloudOps Automation and FinOps Toolkit** – Pre-configured hybrid-cloud workflows and seamlessly integrations (jupyterlab, mkdocs, boto3, moto) for managing cloud infrastructure 🌐.  
+
+| **Feature**              | **Toolchain**                            | **Purpose**                                        |
+|--------------------------|-------------------------------------|----------------------------------------------------|
+| 🛠️ Configuration         | `pyproject.toml`                 | Centralized configuration for dependencies, testing, and linting.  |
+| 🧹 Task Automation       | [`Taskfile`](https://taskfile.dev/) | Automates repetitive tasks like linting, testing, and publishing.  |
+| 📦 Python Dependencies   | [`uv`](https://docs.astral.sh/uv/)  | Lightning-fast dependency resolution, caching, and builds. |
+| 💅 Linting & Formatting  | [`ruff`](https://docs.astral.sh/ruff/) | Enforces code quality standards, auto-formatting, and import sorting.  |
+| 🧪 Testing Framework     | [`pytest`](https://docs.pytest.org/)  | Comprehensive unit tests, integration tests with coverage reporting.    |
+| 🐳 Docker Integration    | Dockerfile + [`DevContainer`](https://containers.dev/)  | Optimized wolfi-based multi-stage builds for CI/CD and local development environments. |
+| 🦾 CI/CD Pipelines       | [`GitHub Actions`](https://github.com/features/actions) | Automated builds, tests, and deployments to PyPI and GHCR. |
+| 📝 Security Compliance   | [`chainguard/wolfi-base`](https://hub.docker.com/r/chainguard/wolfi-base) + SBOM + Attestations | Ensures compliance, vulnerability scanning, and security transparency. |
 
 ---
 
-## Deliverables 💎
+### WIP
 
-|**:calendar:**|**:alarm_clock: Deliverables / Tasks Done**| **:link: Reference Links**|
-|------|--------------------|---------------------|
-|~~01~~| 🎓 **AWS Certified Data Analytics - Specialty (DAS)** (Collecting Streaming Data, Data Collection and Getting Data, Amazon Elastic Map Reduce (EMR), Using Redshift & Redshift Maintenance & Operations, AWS Glue, Athena, and QuickSight, ElasticSearch, AWS Security Services) ✅ | [A Cloud Guru - DAS](https://learn.acloud.guru/course/aws-certified-database-speciality-dbs-c01/dashboard) & [ACG Practice Exam](https://practice-exam.acloud.guru/9f55ebb2-12f8-4a55-a41b-fe5cb1917e30) & [UDemy Practice Exam](https://www.udemy.com/course/aws-certified-data-analytics-specialty-practice-exams-amazon/)|
-|02| 🎓 **AWS Certified Machine Learning - Specialty (MLS-C01)** (Data Preparation, Data Analysis and Visualization, Modeling, Algorithms, Evaluation and Optimization, Implementation and Operations) ☑️ | [A Cloud Guru - MLS-C01](https://learn.acloud.guru/course/aws-certified-machine-learning-specialty/dashboard) & [ACG Practice Exam](https://practice-exam.acloud.guru/f87ac9a1-2d47-44f1-8e10-2a8e43959ef5) & [UDemy Practice Exam](https://www.udemy.com/course/aws-certified-machine-learning-specialty-practice-exams-amazon/) |  
-|~~03~~| 🛠 Reproducible Local Development for Data Science and Machine Learning projects | [Data Science](https://github.com/nnthanh101/Data-Science) | 
-|04| 👨‍💻 **Analytics-Experience Project:** Time Series Forecasting & Machine Learning Prediction | [Analytics-Experience Project](https://analytics-experience.pages.dev) |
-|05| 📚 **MLOps** | [MLOps]() |
-|06| 💹 **Analytics Dashboard:** Data Insights & Visual Analytics | [Visual Analytics]()|
-|07| 🚀 **Scalable MLOps** MLOps at Production-grade Scale | [Scalable MLOps](#)|
+- [ ] 📚 auto doc generation
+- [ ] **CLI Tools** – Typer simplifies automation for AWS resources.  
+- [ ] **Logging** – Loguru ensures structured logs for debugging. 
+- [x] 🐳 CI/CD Optimized Docker Image runs when a new *release* is created pushing to gh registry
+- [x] 🦾 GitHub actions:
+    - [x] auto publish to [`pypi`](https://pypi.org/) on push on `main`
+    - [ ] auto creating a new tag on push on `main`, sync versions
+    - [x] run `tests` and `lint` on `dev` and `main` when a PR is open
 
---------
+## 🚀 Quick Start
 
-## Project Organization
+### 1. Clone the Repository
 
-> 🛠 Production-grade project structure for successful data-science or machine-learning projects 🚀
+```bash
+git clone https://github.com/nnthanh101/runbooks.git
+cd runbooks
+```
 
-> 💎 End-to-end Data Science and Advanced Analytics Experience 🚀
+### 2. Install Dependencies and Run CI/CD Pipelines
 
+```bash
+echo "Install Python dependencies using UV"
+task install
+
+echo "Run CI/CD pipeline tasks: clean, lint, format, test, and build"
+task ci
+
+echo "Publish the project package to PyPI"
+task publish
+```
+
+### 3. Run in DevContainer 🐳
+
+1. Open the project in **VSCode**.  
+2. Install the [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.  
+3. **Reopen in Container**:  
+   **Command Palette `Ctrl+Shift+P` → Reopen in Container**.  
+
+---
+
+## Project Structure
+
+> 🛠 End-to-end Production-grade project structure for successful 💎 CloudOps Automation and Visual Analytics FinOps projects 🚀
 
 ```
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          🤝 Explain your project and its structure for better collaboration.
-├── config/
-│   └── logging.config.ini
+cloudops-automation/
+├── .devcontainer/     ## Dev Container configurations
+│   └── Dockerfile     ## Container image build file
+├── .github/           ## CI/CD workflows
+│   ├── workflows/     ## GitHub Actions workflows
+│   └── templates/     ## Workflow templates
+├── .vscode/           ## IDE-specific configurations
+├── config/            ## Configuration files (YAML, JSON)
 ├── data               🔍 Where all your raw and processed data files are stored.
 │   ├── external       <- Data from third-party sources.
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, unprocessed, immutable data dump.
 │
-├── docs               📓 A default docusaurus | mkdocs project; see docusaurus.io | mkdocs.org for details
+├── docs               📓 A default mkdocs project; see mkdocs.org for details
+│   ├── api/                 ## API documentation
+│   ├── architecture/        ## Architecture diagrams
+│   ├── tutorials/           ## Tutorials and guides
+│   ├── getting-started.md   ## Quickstart guide
+│   └── index.md             ## Overview documentation
 │
+├── logs/                    ## Log files for debugging
+|
 ├── models             🧠 Store your trained and serialized models for easy access and versioning.
 │
-├── notebooks          💻 Jupyter notebooks for exploration and visualization.
+├── notebooks          💻 Jupyter notebooks for experiments and visualization.
 │   ├── data_exploration.ipynb
 │   ├── data_preprocessing.ipynb
 │   ├── model_training.ipynb
 │   └── model_evaluation.ipynb
 │
-├── pyproject.toml     <- Project configuration file with package metadata for analytics
-│                         and configuration for tools like black
+├── pyproject.toml     <- Project configuration file with package metadata for 
+│                         runbooks and configuration for tools like black
 │
+├── src/                            ## 🧩 Source code for use in this project.
+│   ├── runbooks/                   ## Main module for CloudOps Runbooks automation
+│   │   ├── __init__.py             ## Package initializer
+│   │   ├── calculator.py           ## [Python101] Calculator
+│   │   ├── config.py
+│   │   ├── exceptions.py
+│   │   ├── utils.py                ## Utility scripts (logging, configs)
+│   │   └── cleanup.py              ## Cleanup automation runbook
+│   ├── main.py     
+├── test/                           ## Unit and integration tests
+│   ├── conftest.py
+│   ├── __init__.py
+│   ├── test_calculator.py          ## [Python101] Test cases for calculator
+│   ├── test_utils.py               ## Test cases for utils
+│   └── test_exceptions.py         
+├── templates/                      ## Terraform and CloudFormation templates
+├── tools/                          ## Developer tools and scripts
+├── .dockerignore                   ## Docker ignore file
+├── .env                            ## Environment variables
+├── .gitignore                      ## Git ignore file
+├── .python-version                 ## Python version management
+├── .gitignore
+├── mkdocs.yml                      # Documentation generator configuration
+├── README.md          🤝 Explain your project and its structure for better collaboration.
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
 ├── reports            📊 Generated analysis (reports, charts, and plots) as HTML, PDF, LaTeX.
 │   └── figures        <- Generated graphics and figures to be used in reporting
 │
 ├── requirements.txt   🛠 The requirements file for reproducing the analysis environment, for easy environment setup.
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-├── src                💾 Source code for data processing, feature engineering, and model training.
-│   ├── data/
-│   │   └── data_preprocessing.py
-│   ├── features/
-│   │   └── feature_engineering.py
-│   ├── models/
-│   │   └── model.py
-│   └── utils/
-│       └── helper_functions.py
-├── tests/
-│   ├── test_data_preprocessing.py
-│   ├── test_feature_engineering.py
-│   └── test_model.py
-├── setup.py           🛠 A Python script to make the project installable.
-├── Dockerfile
-├── docker-compose.yml
-├── .gitignore
-└── analytics          🧩 Source code for use in this project.
-    │
-    ├── __init__.py    <- Makes analytics a Python module
-    │
-    ├── data           <- Scripts to download, preprocess, or generate data
-    │   └── make_dataset.py
-    │
-    ├── features       <- Scripts to turn raw data into features for modeling
-    │   └── build_features.py
-    │
-    ├── models         <- Scripts to train models and then use trained models to make predictions.           
-    │   ├── predict_model.py
-    │   └── train_model.py
-    │
-    └── visualization  <- Scripts to create exploratory and results-oriented visualizations
-        └── visualize.py
+└── Taskfile           <- Taskfile with convenience commands like `task data` or `task train`
+
+```
+
+### [Github Container Registry to store and manage Docker and OCI images](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+
+1. Check if the image exists in GitHub Packages:
+
+```
+docker pull ghcr.io/nnthanh101/runbooks:latest
+```
+
+2. If the image doesn't exist, build and push it:
+
+```
+docker build -t ghcr.io/nnthanh101/runbooks:latest .
+docker login ghcr.io -u nnthanh -p GH_TOKEN
+docker push ghcr.io/nnthanh101/runbooks:latest
+```
+
+3. Inspect
+
+```
+docker inspect ghcr.io/nnthanh101/runbooks:latest
 ```

@@ -1,5 +1,5 @@
-# mkdocs.yml
-site_name: Data Science
+## mkdocs.yml
+site_name: 🔥 CloudOps Automation 🦅
 site_author: nnthanh101@gmail.com
 
 theme:
@@ -14,13 +14,8 @@ plugins:
   - mkdocstrings
 
 nav:
-  - Data Science Overview: index.md
-  ## Computer Science 101
-  - Python 101:
-    - Tutorials: 'python/tutorials.md'
-    - How-To Guides: 'python/guides.md'
-    - Reference: 'python/reference.md'
-    - Explanation: 'python/explanation.md'
-  ## TODO: Math for Computer Science
-  # - Math for CS:
-  #   - Overview: index.md
+  - 🥇 CloudOps Overview: index.md
+  - Explanation: 'runbooks/explanation.md'
+  - How-To Guides: 'runbooks/guides.md'
+  - Reference: 'runbooks/reference.md'
+  - Tutorials: 'runbooks/tutorials.md'

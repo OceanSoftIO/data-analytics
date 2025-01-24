@@ -1,0 +1,83 @@
+name: 🚀 Publish to PyPI
+
+on:
+  push:
+    branches:
+      - main
+      # - python-template
+
+permissions:
+  contents: read
+  id-token: write  ## Required for trusted publishing via OpenID Connect (OIDC)
+
+env:
+  PACKAGE_NAME: runbooks
+  BUILD_DIR: dist
+
+jobs:
+  build-format-lint-and-publish-to-pypi:
+    runs-on: ubuntu-latest
+
+    steps:
+      ## 1. Checkout repository
+      - name: 🛎️ Checkout Source Code
+        uses: actions/checkout@v4
+
+      ## 2. Set up Python environment
+      - name: 🐍 Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      ## 3. Install UV
+      - name: 📦 Install UV Package Manager
+        uses: astral-sh/setup-uv@v4
+
+      ## 4. Sync dependencies
+      - name: 📥 Sync Dependencies
+        run: |
+          uv sync --all-extras --dev
+
+      ## 5. Code formatting and linting
+      - name: 💅 Format and Lint Code
+        run: |
+          uv run ruff format
+          uv run ruff check --select I --fix
+          uv run ruff check src/
+
+      ## 6. Run Tests with Coverage
+      - name: 🧪 Run Tests with Coverage
+        run: |
+          uv run pytest tests/ --cov=src/runbooks --cov-report=xml
+
+      ## 7. Upload Coverage Report to Codecov
+      # - name: 📈 Upload Coverage Report
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     files: ./coverage.xml
+      #     fail_ci_if_error: true
+
+      ## 8. Build Distribution Packages
+      - name: 🛠️ Build Distribution Packages
+        run: uv build
+
+      ## 9. Publish to PyPI
+      - name: 🚀 Publish to PyPI
+        if: success()
+        run: uv publish --token ${{ secrets.UV_PUBLISH_TOKEN }}
+
+      ## 10. Generate SBOM (Software Bill of Materials)
+      - name: 📝 Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          artifact-name: sbom.spdx.json
+          format: spdx-json
+          output-file: sbom.spdx.json
+
+      ## 11. Upload SBOM to GitHub Artifacts
+      - name: 📤 Upload SBOM Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sbom
+          path: sbom.spdx.json

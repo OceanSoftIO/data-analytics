@@ -1,0 +1,198 @@
+## ==================================================
+## 🔧 Taskfile: Workflow Automation for CloudOps
+## ==================================================
+version: '3'
+# silent: true
+# output: prefixed
+
+
+#################################################################################
+## 🌎 GLOBAL VARIABLES                                                          #
+#################################################################################
+vars:
+  TODAY: '{{ now | date "2006-01-02T15:04:05-07:00" }}'
+  PROJECT_NAME: "runbooks"
+  PYTHON_VERSION: "3.12"
+  PYTHON_INTERPRETER: "python3"
+  CHECK_DIRS: "src/runbooks"
+  DATA_BUCKET: "s3://runbooks/data"
+  DATA_LOCAL_DIR: "data"
+  PUBLISH_TOKEN: "{{.UV_PUBLISH_TOKEN}}"
+
+#################################################################################
+# TASKS                                                                         #
+#################################################################################
+
+tasks:
+  ## Default Task: Help Menu
+  default:
+    desc: "Display available tasks and their descriptions"
+    cmds:
+      - task: help
+
+  #################################################################################
+  # ENVIRONMENT SETUP                                                             #
+  #################################################################################
+
+  
+    # - echo "Installing build tool..."
+    # - "{{.PYTHON_INTERPRETER}} -m pip install build --upgrade"
+
+  ## ==========================
+  ## INSTALL DEPENDENCIES
+  ## ==========================
+  install:
+    desc: "Install Python dependencies using UV with copy mode"
+    cmds:
+      - echo "🌐 Setting UV link mode for compatibility..."
+      # - export UV_LINK_MODE={{.UV_LINK_MODE}}
+      - export UV_LINK_MODE=copy
+      # - uv self update  ## Optional: Update UV tool if required
+      - echo "📦 Syncing dependencies with UV..."
+      - uv sync --all-extras --dev
+      - uv pip list
+      - echo "✅ Dependencies installed successfully."
+      ## PIP
+      # - echo "Installing dependencies with PIP..."
+      # - "{{.PYTHON_INTERPRETER}} -m pip install build --upgrade"
+
+  ## Clean Build Artifacts and Cache
+  clean:
+    desc: "Clean Python cache files and build artifacts"
+    cmds:
+      - echo "Cleaning Python cache files..."
+      - find . -type f -name "*.py[co]" -delete
+      - find . -type d -name "__pycache__" -delete
+      - echo "Removing temporary directories..."
+      - rm -rf .pytest_cache .mypy_cache dist build *.egg-info
+
+  ## Deep Clean (including dependencies)
+  real-clean:
+    desc: "Perform deep clean of all build artifacts and dependencies"
+    cmds:
+      - task: clean
+      - echo "Removing virtual environment..."
+      - rm -rf .venv
+
+  #################################################################################
+  # CODE QUALITY CHECKS                                                           #
+  #################################################################################
+
+  ## Format Code with Ruff
+  format:
+    desc: "Auto-format code using Ruff"
+    cmds:
+      - echo "Formatting code with Ruff..."
+      - "{{.PYTHON_INTERPRETER}} -m ruff format {{.CHECK_DIRS}}"
+
+  ## Linting Code with Ruff
+  lint:
+  desc: "Run and auto-fix linting issues with Ruff"
+  cmds:
+    - task: format
+    - echo "Running Ruff lint checks and fixing issues..."
+    - "{{.PYTHON_INTERPRETER}} -m ruff check {{.CHECK_DIRS}} --select I --fix"
+    - "{{.PYTHON_INTERPRETER}} -m ruff check {{.CHECK_DIRS}} --select I -e"
+
+  ## Check Code Quality
+  code_quality:
+    desc: "Validcate Code Quality with SonarQube"
+    cmds:
+      - echo "Validcate Code Quality using SonarQube"
+      - echo "sonar-python https://www.sonarsource.com/knowledge/languages/python/"
+  
+
+  #################################################################################
+  # DATA MANAGEMENT                                                               #
+  #################################################################################
+
+  ## Sync Data from Cloud Storage
+  sync_data_down:
+    desc: "Download data from S3 storage to local directory"
+    cmds:
+      - echo "Syncing data from S3 bucket to local directory..."
+      - aws s3 sync {{.DATA_BUCKET}}/ {{.DATA_LOCAL_DIR}}/
+
+  ## Upload Data to Cloud Storage
+  sync_data_up:
+    desc: "Upload local data to S3 storage"
+    cmds:
+      - echo "Syncing local data to S3 bucket..."
+      - aws s3 sync {{.DATA_LOCAL_DIR}}/ {{.DATA_BUCKET}}/
+
+  #################################################################################
+  # BUILD AND PUBLISH                                                             #
+  #################################################################################
+
+  ## Build the Project
+  build:
+  desc: "Build the project artifacts using pyproject.toml"
+  cmds:
+    - echo "Building artifacts with modern PEP 621 standards..."
+    - "{{.PYTHON_INTERPRETER}} -m build"
+
+  ## Publish the Project
+  publish:
+    desc: "Publish the project package to PyPI"
+    cmds:
+      - echo "Publishing package to PyPI..."
+      # - "{{.PYTHON_INTERPRETER}} -m twine upload dist/* --username __token__ --password '{{.PUBLISH_TOKEN}}'"
+      - uv build
+      - uv publish --token $UV_PUBLISH_TOKEN
+
+
+  #################################################################################
+  # CI/CD PIPELINE TASKS                                                           #
+  #################################################################################
+
+  test:
+    desc: "Run tests with pytest and coverage"
+    cmds:
+      - echo "Running tests with pytest..."
+      - export PYTHONPATH=src:$PYTHONPATH
+      - uv run pytest tests/ --cov={{.CHECK_DIRS}} --cov-report=term-missing
+
+  ## CI/CD Pipeline Automation
+  ci:
+    desc: "Run CI/CD pipeline tasks: clean, lint, format, and test"
+    cmds:
+      - task: clean
+      - task: lint
+      - task: code_quality
+      - export PYTHONPATH=src:$PYTHONPATH
+      - task: test
+      - task: build
+
+  #################################################################################
+  # DOCKER TASKS                                                                   #
+  #################################################################################
+
+  ## Build Docker Image
+  docker-build:
+    desc: "Build Docker image with multi-stage process"
+    cmds:
+      - echo "Building Docker image..."
+      - docker build -t {{.PROJECT_NAME}}:latest .
+
+  ## Run Docker Container
+  docker-run:
+    desc: "Run the Docker container in interactive mode"
+    cmds:
+      - docker run -it {{.PROJECT_NAME}}:latest
+
+  ## Clean Docker Images
+  docker-clean:
+    desc: "Remove Docker images and containers"
+    cmds:
+      - echo "Cleaning Docker resources..."
+      - docker system prune -af
+
+  #################################################################################
+  # DOCUMENTATION AND HELP                                                         #
+  #################################################################################
+
+  ## Self-Documenting Help Menu
+  help:
+    desc: "List all available tasks with descriptions"
+    cmds:
+      - task --list

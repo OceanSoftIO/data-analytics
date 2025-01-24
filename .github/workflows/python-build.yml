@@ -1,0 +1,116 @@
+name: 🚀 Build and Publish Docker Image
+
+## Configures/Triggers this workflow to run every time a change is pushed to the branch called `release` or a new release is created.
+on:
+  release:
+    types: [published]
+  push:
+    branches:
+      - "release"
+      - python-template
+
+## Defines two custom environment variables for Docker image configuration. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+## There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    ## Fine-grained permissions for enhanced security
+    ## Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write       ## Required for signing artifacts
+
+    steps:
+      ## 1. Checkout the source code
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      ## 2. Set up QEMU for multi-architecture builds
+      - name: 🏗️ Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      ## 3. Set up Docker Buildx for faster builds
+      - name: 🏗️ Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+
+      ## 4. Log in to GitHub Container Registry (GHCR) for publishing using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
+      ## Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
+      - name: 🔑 Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      ## 5. Extract metadata for image tagging and labeling
+      ## This step uses [docker/metadata-action](https://github.com/docker/metadata-action#about) to extract tags and labels that will be applied to the specified image. The `id` "meta" allows the output of this step to be referenced in a subsequent step. The `images` value provides the base name for the tags and labels.
+      - name: 🏷️ Extract Docker metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+            type=raw,value=latest
+          labels: |
+            org.opencontainers.image.title=${{ github.event.repository.name }}
+            org.opencontainers.image.description=${{ github.event.repository.description }}
+            org.opencontainers.image.version=${{ github.event.release.tag_name || 'latest' }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.created=${{ github.event.repository.pushed_at }}
+
+      ## 6. Cache dependencies for faster builds
+      - name: 📦 Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+
+      ## 7. Build and push Docker image using multi-stage build
+      ## This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
+      ## It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
+      ## It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
+      - name: 🛠️ Build and Push Docker image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
+      ## 8. Generate provenance and attestation for supply chain security
+      ## This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see "[AUTOTITLE](/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds)."
+      - name: 🔏 Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      ## 9. Security scanning using Trivy
+      - name: 🔍 Scan Docker image for vulnerabilities
+        uses: aquasecurity/trivy-action@0.29.0
+        with:
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          scanners: "vuln" ## Focus on vulnerabilities, not secrets
+          severity: HIGH,CRITICAL
+          trivy-config: ".devcontainer/.trivyignore"
