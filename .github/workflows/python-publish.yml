@@ -3,8 +3,8 @@ name: 🚀 Publish to PyPI
 on:
   push:
     branches:
-      - main
-      # - python-template
+      # - main
+      - python-template
 
 permissions:
   contents: read
